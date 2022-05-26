@@ -1,9 +1,12 @@
 import py_compile
 from re import template
+from django.http import HttpResponse
 from django.shortcuts import redirect, render
 from django.contrib import messages
+from django.contrib.auth import authenticate, login, logout
 
-from .forms import UsuarioForm
+
+from .forms import UsuarioForm, UsuarioLogin
 
 # Create your views here.
 
@@ -30,4 +33,29 @@ def novo_usuario(request):
 def usuario_login(request):
     template_name = 'usuarios/usuario_login.html'
     context = {}
+    if request.method == 'POST':
+        form = UsuarioLogin(request.POST)
+        if form.is_valid():
+            usuario = form.cleaned_data['usuario']
+            senha = form.cleaned_data['senha']
+            user = authenticate(username=usuario, password=senha)
+            if user is not None:
+                if user.is_active:
+                    login(request, user)
+                    messages.success(request, 'Login feito com sucesso.')
+                    return redirect('financas:principal')
+                else:
+                    messages.warning(request, 'Sua senha foi inativada.')
+                    return redirect('usuarios:usuario_login')
+            else:
+                messages.error(request, 'Usuário ou senha inválida.')
+                return redirect('usuarios:usuario_login')
+    else:
+        form = UsuarioLogin()
+        context['form'] = form
     return render(request,template_name,context)
+
+def usuario_logout(request):
+    logout(request)
+    messages.info(request, 'Você saiu do sistema.')
+    return redirect('usuarios:usuario_login')

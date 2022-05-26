@@ -47,10 +47,13 @@ DJANGO_APPS = [
     'django.contrib.staticfiles',
 ]
 
-TERCEIROS_APPS = []
+TERCEIROS_APPS = [
+    'widget_tweaks',
+]
 
 PROJETO_APPS = [
     'usuarios.apps.UsuariosConfig',
+    'financas.apps.FinancasConfig',
 ]
 
 INSTALLED_APPS = DJANGO_APPS + TERCEIROS_APPS + PROJETO_APPS
@@ -123,7 +126,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/4.0/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'pt-br'
 
 TIME_ZONE = 'UTC'
 

@@ -1,21 +1,29 @@
 {% extends 'base.html' %}
+{% load widget_tweaks %}
 
 {% block title %} Login | {{ block.super }} {% endblock title %}
 
 {% block body %}
 
     <div class='container'>
-        <div class='row'>
-            <h1>Faça Login</h1>
-            <p>
-                <label>Usuário</label>
-                <input type='text'>
-            </p>
-            <p>
-                <label>Senha</label>
-                <input type='password'>
-            </p>
-            <button type='submit'>Entrar</button>
+        <div class='row justify-content-center'>
+            <div class='col-8'>
+
+                <h1>Faça Login</h1>
+                {% include 'blocos/mensagens.html' %}
+                <form method='post'>
+                    {% csrf_token %}
+                    <div class="mb-3">
+                        <label for="{{ form.usuario.id_for_label }}">{{form.usuario.label}}</label>
+                        {% render_field form.usuario class='form-control' placeholder='Nome de usuário' autofocus='autofocus' %}
+                    </div>
+                    <div class="mb-3">
+                        <label for="{{ form.senha.id_for_label }}">{{form.senha.label}}</label>
+                        {% render_field form.senha class='form-control' placeholder='Sua senha' %}
+                    </div>
+                    <button type='submit' class='btn btn-primary'>Entrar</button>
+                </form>
+            </div>
         </div>
     </div>
     

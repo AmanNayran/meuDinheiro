@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block title %} Seja bem vindo | {{ block.super }} {% endblock title %}
+
+{% block body %}
+<div class='container'>
+    {% include 'blocos/mensagens.html' %}
+    <div class='row'>
+        <h1> Aqui jas o principal </h1>
+    </div>
+</div>
+
+{% endblock body %}
