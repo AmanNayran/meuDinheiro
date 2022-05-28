@@ -21,7 +21,7 @@
                         <label for="{{ form.senha.id_for_label }}">{{form.senha.label}}</label>
                         {% render_field form.senha class='form-control' placeholder='Sua senha' %}
                     </div>
-                    <button type='submit' class='btn btn-primary'>Entrar</button>
+                    <button type='submit' class='btn btn-success'>Entrar</button> <a href="{% url 'usuarios:novo_usuario' %}" class="btn btn-secondary">Cadastrar</a>
                 </form>
             </div>
         </div>
