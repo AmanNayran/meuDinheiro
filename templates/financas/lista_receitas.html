@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 
 {% block title %}
-    Categorias | {{ block.super }}
+    Receitas | {{ block.super }}
 {% endblock title %}
 
 {% block body %}
@@ -9,34 +9,34 @@
     <div class='container'>
         <div class='row justify-content-center mt-3'>
             <div class='col'>
-                <h1>Categorias</h1>
+                <h1>Receitas</h1>
                 {% include 'blocos/mensagens.html' %}
                 <table class="table table-hover">
                     <thead>
                         <tr>
                         <th scope="col">#</th>
-                        <th scope="col">Nome</th>
                         <th scope="col">Descrição</th>
-                        <th scope="col">Tipo</th>
+                        <th scope="col">Valor R$</th>
+                        <th scope="col">Categoria</th>
                         <th scope="col">Ações</th>
                         </tr>
                     </thead>
                     <tbody>
-                        {% for categoria in categorias %}
+                        {% for receita in receitas %}
                             <tr>
                                 <th scope="row">{{ categoria.id }}</th>
-                                <td>{{ categoria.nome }}</td>
                                 <td>{{ categoria.descricao }}</td>
-                                <td>{{ categoria.get_tipo_display }}</td>
+                                <td>{{ categoria.valor }}</td>
+                                <td>{{ categoria.categoria }}</td>
                                 <td>
-                                    <a href="{% url 'financas:editar_categoria' categoria.id %}" class="btn btn-outline-secondary btn-sn">Editar</a>
-                                    <a href="{% url 'financas:apagar_categoria' categoria.id %}" class="btn btn-outline-danger btn-sn">Apagar</a>
+                                    <a href="" class="btn btn-outline-secondary btn-sn">Editar</a>
+                                    <a href="" class="btn btn-outline-danger btn-sn">Apagar</a>
                                 </td>
                             </tr>
                         {% endfor %}
                     </tbody>
                 </table>
-                <a href="{% url 'financas:nova_categoria' %}" class="btn btn-primary">Nova categoria</a>
+                <a href="{% url 'financas:nova_receita' %}" class="btn btn-primary">Nova receita</a>
             </div>
         </div>
     </div>

@@ -8,3 +8,8 @@ class CategoriaForm(forms.ModelForm):
         model = Categoria
         exclude = ['usuario']
 
+class ReceitaForm(forms.ModelForm):
+
+    class Meta:
+        model = Receita
+        exclude = ['usuario']
