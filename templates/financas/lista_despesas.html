@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 
 {% block title %}
-    Receitas | {{ block.super }}
+    Despesa | {{ block.super }}
 {% endblock title %}
 
 {% block body %}
@@ -9,12 +9,13 @@
     <div class='container'>
         <div class='row justify-content-center mt-3'>
             <div class='col'>
-                <h1>Receitas</h1>
+                <h1>Despesa</h1>
                 {% include 'blocos/mensagens.html' %}
                 <table class="table table-hover">
                     <thead class="table-dark">
                         <tr>
                         <th scope="col">#</th>
+                        <th scope="col">Identificação</th>
                         <th scope="col">Descrição</th>
                         <th scope="col">Valor R$</th>
                         <th scope="col">Categoria</th>
@@ -23,22 +24,23 @@
                         </tr>
                     </thead>
                     <tbody>
-                        {% for receita in receitas %}
+                        {% for despesa in despesas %}
                             <tr>
-                                <th scope="row">{{ receita.id }}</th>
-                                <td>{{ receita.descricao }}</td>
-                                <td>{{ receita.valor }}</td>
-                                <td>{{ receita.categoria }}</td>
-                                <td>{{ receita.cadastrada_em|date:'d/m/y' }}</td>
+                                <th scope="row">{{ despesa.id }}</th>
+                                <td>{{ despesa.identificacao }}</td>
+                                <td>{{ despesa.descricao }}</td>
+                                <td>{{ despesa.valor }}</td>
+                                <td>{{ despesa.categoria }}</td>
+                                <td>{{ despesa.cadastrada_em|date:'d/m/y' }}</td>
                                 <td>
-                                    <a href="{% url 'financas:editar_receita' receita.id %}" class="btn btn-outline-secondary btn-sn">Editar</a>
-                                    <a href="{% url 'financas:apagar_receita' receita.id %}" class="btn btn-outline-danger btn-sn">Apagar</a>
+                                    <a href="{% url 'financas:editar_despesa' despesa.id %}" class="btn btn-outline-secondary btn-sn">Editar</a>
+                                    <a href="{% url 'financas:apagar_despesa' despesa.id %}" class="btn btn-outline-danger btn-sn">Apagar</a>
                                 </td>
                             </tr>
                         {% endfor %}
                     </tbody>
                 </table>
-                <a href="{% url 'financas:nova_receita' %}" class="btn btn-primary">Nova receita</a>
+                <a href="{% url 'financas:nova_despesa' %}" class="btn btn-primary">Nova despesa</a>
             </div>
         </div>
     </div>

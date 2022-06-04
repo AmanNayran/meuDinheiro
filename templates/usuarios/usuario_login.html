@@ -7,21 +7,29 @@
 
     <div class='container'>
         <div class='row justify-content-center'>
-            <div class='col-8'>
+            <div class='col-6'>
 
-                <h1>Faça Login</h1>
+                <div class="col-4 mx-auto">
+                    <h1>Faça Login</h1>
+                </div>
                 {% include 'blocos/mensagens.html' %}
                 <form method='post'>
                     {% csrf_token %}
-                    <div class="mb-3">
+                    <div class="mb-3 col-8 mx-auto">
                         <label for="{{ form.usuario.id_for_label }}">{{form.usuario.label}}</label>
                         {% render_field form.usuario class='form-control' placeholder='Nome de usuário' autofocus='autofocus' %}
                     </div>
-                    <div class="mb-3">
+                    <div class="mb-3 col-8 mx-auto">
                         <label for="{{ form.senha.id_for_label }}">{{form.senha.label}}</label>
                         {% render_field form.senha class='form-control' placeholder='Sua senha' %}
                     </div>
-                    <button type='submit' class='btn btn-success'>Entrar</button> <a href="{% url 'usuarios:novo_usuario' %}" class="btn btn-secondary">Cadastrar</a>
+                    <div class="d-grid gap-2 col-4 mx-auto">
+                        <button type='submit' class='btn btn-success'>Entrar</button> 
+                    </div>
+                    <div class="col-4 mx-auto">
+                        <a>Não tem conta?</a> 
+                        <a href="{% url 'usuarios:novo_usuario' %}">Cadastrar</a>
+                    </div>
                 </form>
             </div>
         </div>

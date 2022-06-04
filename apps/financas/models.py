@@ -34,7 +34,7 @@ class Receita(models.Model):
     class Meta:
         verbose_name = 'Receita'
         verbose_name_plural = 'Receitas'
-        ordering = ['-cadastrada_em']
+        ordering = ['id']
 
     def __str__(self) -> str:
         return self.descricao
@@ -52,7 +52,7 @@ class Despesa(models.Model):
     class Meta:
         verbose_name = 'Despesa'
         verbose_name_plural = 'Despesas'
-        ordering = ['-cadastrada_em']
+        ordering = ['id']
 
     def __str__(self):
         return self.identificacao
