@@ -1,13 +1,13 @@
 {% extends 'base.html' %}
 
-{% block title %} Seja bem vindo | {{ block.super }} {% endblock title %}
+{% block title %} Resultado da Busca | {{ block.super }} {% endblock title %}
 
 {% block body %}
 <div class='container'>
     {% include 'blocos/mensagens.html' %}
     <div class='row justify-content-center mt-3'>
         <div class='col-8'>
-            <h1> Atividades recentes </h1>
+            <h1> Resultado da Busca </h1>
             <h3><a href="{% url 'financas:lista_categorias' %}" class= 'text-decoration-none text-dark'>Em Categoria</a></h3>
                 {% include 'blocos/mensagens.html' %}
                 <table class="table table-hover">
@@ -21,7 +21,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        {% for categoria in ultimas_categorias %}
+                        {% for categoria in categorias %}
                             <tr>
                                 <th scope="row">{{ categoria.id }}</th>
                                 <td>{{ categoria.nome }}</td>
@@ -45,42 +45,46 @@
                         <th scope="col">#</th>
                         <th scope="col">Descrição</th>
                         <th scope="col">Valor R$</th>
+                        <th scope="col">Categoria</th>
                         <th scope="col">Ações</th>
                         </tr>
                     </thead>
                     <tbody>
-                        {% for receita in ultimas_receitas %}
+                        {% for receita in receitas %}
                             <tr>
                                 <th scope="row">{{ receita.id }}</th>
                                 <td>{{ receita.descricao }}</td>
                                 <td>{{ receita.valor }}</td>
+                                <td>{{ receita.categoria }}</td>
                                 <td>
                                     <div class="btn-group" role="group" aria-label="Basic outlined example">
                                     <a href="{% url 'financas:editar_receita' receita.id %}" class="btn btn-outline-secondary btn-sn">Editar</a>
                                     <a href="{% url 'financas:apagar_receita' receita.id %}" class="btn btn-outline-danger btn-sn">Apagar</a>
-                                    </div>
-                                </td>
-                            </tr>
+                                </div>
+                            </td>
+                        </tr>
                         {% endfor %}
                     </tbody>
                 </table>
-
-            <h3><a href="{% url 'financas:lista_despesas' %}" class= 'text-decoration-none text-dark'>Em Despesa</a></h3><h3></h3>
+                
+                <h3><a href="{% url 'financas:lista_despesas' %}" class= 'text-decoration-none text-dark'>Em Despesa</a></h3><h3></h3>
                 <table class="table table-hover">
                     <thead class="table-dark">
                         <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">Descrição</th>
-                        <th scope="col">Valor R$</th>
-                        <th scope="col">Ações</th>
+                            <th scope="col">#</th>
+                            <th scope="col">Descrição</th>
+                            <th scope="col">Valor R$</th>
+                            <th scope="col">Categoria</th>
+                            <th scope="col">Ações</th>
                         </tr>
                     </thead>
                     <tbody>
-                        {% for despesa in ultimas_despesas %}
-                            <tr>
-                                <th scope="row">{{ despesa.id }}</th>
+                        {% for despesa in despesas %}
+                        <tr>
+                            <th scope="row">{{ despesa.id }}</th>
                                 <td>{{ despesa.descricao }}</td>
                                 <td>{{ despesa.valor }}</td>
+                                <td>{{ despesa.categoria }}</td>
                                 <td>
                                     <div class="btn-group" role="group" aria-label="Basic outlined example">
                                     <a href="{% url 'financas:editar_despesa' despesa.id %}" class="btn btn-outline-secondary btn-sn">Editar</a>

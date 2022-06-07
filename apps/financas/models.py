@@ -2,6 +2,8 @@ from tabnanny import verbose
 from django.db import models
 from django.contrib.auth.models import User
 
+from .managers import CategoriaManager, ReceitaManager, DespesaManager
+
 # Create your models here.
 
 class Categoria(models.Model):
@@ -14,6 +16,7 @@ class Categoria(models.Model):
     descricao = models.TextField(verbose_name='Descrição', blank=True, null=True)
     tipo = models.CharField(verbose_name='Tipo', max_length=2, choices=TIPO_CAT_CHOICE)
 
+    objects = CategoriaManager()
 
     class Meta:
         verbose_name = 'Categoria'
@@ -31,10 +34,12 @@ class Receita(models.Model):
     cadastrada_em = models.DateTimeField(verbose_name='Cadastrada em', auto_now_add=True)
     atualizada_em = models.DateTimeField(verbose_name='Atualizada em', auto_now=True)
 
+    objects = ReceitaManager()
+
     class Meta:
         verbose_name = 'Receita'
         verbose_name_plural = 'Receitas'
-        ordering = ['id']
+        ordering = ['-atualizada_em']
 
     def __str__(self) -> str:
         return self.descricao
@@ -48,11 +53,12 @@ class Despesa(models.Model):
     cadastrada_em = models.DateTimeField(verbose_name='Cadastrada em', auto_now_add=True)
     atualizada_em = models.DateTimeField(verbose_name='Atualizada em', auto_now=True)
 
+    objects = DespesaManager()
 
     class Meta:
         verbose_name = 'Despesa'
         verbose_name_plural = 'Despesas'
-        ordering = ['id']
+        ordering = ['-atualizada_em']
 
     def __str__(self):
         return self.identificacao

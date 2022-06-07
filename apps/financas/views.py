@@ -1,3 +1,4 @@
+from itertools import chain
 from django.contrib import messages
 from multiprocessing import context
 from re import template
@@ -203,3 +204,18 @@ def apagar_despesa(request, pk):
         return redirect('financas:lista_despesas')
     messages.info(request, 'Despesa apagada.')
     return redirect('financas:lista_despesas')
+
+# RESULTADO
+@login_required
+def buscar(request):
+    template_name = 'financas/busca_resultados.html'
+    context = {}
+    termo = request.GET.get('termo', None)
+    if termo is not None:
+        categorias = Categoria.objects.busca(termo=termo, usuario=request.user)
+        receitas = Receita.objects.busca(termo=termo, usuario=request.user)
+        despesas = Despesa.objects.busca(termo=termo, usuario=request.user)
+        context['categorias'] = categorias
+        context['receitas'] = receitas
+        context['despesas'] = despesas
+    return render(request, template_name, context)
