@@ -1,0 +1,95 @@
+{% extends 'base.html' %}
+
+{% block titule %}
+    Relatorio de Receitas | {{ block.super }}
+{% endblock titule %}
+
+{% block body %}
+    <div class='container'>
+        <div class='row justify-content-center mt-3'>
+            <div class='col'>
+                <h1>Relatório</h1>
+                <form action=''>
+                    <div class='mb-3'>
+                        <label for='id-tipo'>Informe o tipo</label>
+                        <select id='id-tipo' class='form-control' name='tipo'>
+                            <option value='RC'>Receita</option>
+                            <option value='DP'>Despesa</option>
+                        </select>
+                    </div>
+                    <div class='mb-3'>
+                        <label for='id-data_inicial'>Informe a data inicial</label>
+                        <input type='date' id='id-data_inicial' class='form-central' name='data_inicial'>
+                    </div>
+                    <div class='mb-3'>
+                        <label for='id-data_final'>Informe a data final</label>
+                        <input type='date' id='id-data_final' class='form-central' name='data_final'>
+                    </div>
+                    <button type='submit' class='btn btn-info'>Consultar</button>
+                </form>
+                {% if receitas %}
+                    <h3><a href="{% url 'financas:lista_receitas' %}" class= 'text-decoration-none text-dark'>Em Receita</a></h3>
+                    {% include 'blocos/mensagens.html' %}
+                    <table class="table table-hover">
+                        <thead class="table-dark">
+                            <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Descrição</th>
+                            <th scope="col">Valor R$</th>
+                            <th scope="col">Data</th>
+                            <th scope="col">Ações</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for receita in receitas %}
+                                <tr>
+                                    <th scope="row">{{ receita.id }}</th>
+                                    <td>{{ receita.descricao }}</td>
+                                    <td>{{ receita.valor }}</td>
+                                    <td>{{ receita.cadastrada_em|date:'d/m/y' }}</td>
+                                    <td>
+                                        <div class="btn-group" role="group" aria-label="Basic outlined example">
+                                        <a href="{% url 'financas:editar_receita' receita.id %}" class="btn btn-outline-secondary btn-sn">Editar</a>
+                                        <a href="{% url 'financas:apagar_receita' receita.id %}" class="btn btn-outline-danger btn-sn">Apagar</a>
+                                        </div>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                {% endif %}
+
+                {% if despesas %}
+                    <h3><a href="{% url 'financas:lista_despesas' %}" class= 'text-decoration-none text-dark'>Em Despesa</a></h3>
+                    <table class="table table-hover">
+                        <thead class="table-dark">
+                            <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Descrição</th>
+                            <th scope="col">Valor R$</th>
+                            <th scope="col">Data</th>
+                            <th scope="col">Ações</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for despesa in despesas %}
+                                <tr>
+                                    <th scope="row">{{ despesa.id }}</th>
+                                    <td>{{ despesa.descricao }}</td>
+                                    <td>{{ despesa.valor }}</td>
+                                    <td>{{ despesa.cadastrada_em|date:'d/m/y' }}</td>
+                                    <td>
+                                        <div class="btn-group" role="group" aria-label="Basic outlined example">
+                                        <a href="{% url 'financas:editar_despesa' despesa.id %}" class="btn btn-outline-secondary btn-sn">Editar</a>
+                                        <a href="{% url 'financas:apagar_despesa' despesa.id %}" class="btn btn-outline-danger btn-sn">Apagar</a>
+                                        </div>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+{% endblock body %}

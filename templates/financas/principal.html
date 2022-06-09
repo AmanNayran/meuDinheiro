@@ -9,7 +9,6 @@
         <div class='col-8'>
             <h1> Atividades recentes </h1>
             <h3><a href="{% url 'financas:lista_categorias' %}" class= 'text-decoration-none text-dark'>Em Categoria</a></h3>
-                {% include 'blocos/mensagens.html' %}
                 <table class="table table-hover">
                     <thead class="table-dark">
                         <tr>
@@ -17,7 +16,6 @@
                         <th scope="col">Nome</th>
                         <th scope="col">Tipo</th>
                         <th scope="col">Ações</th>
-                        <th ><a href="{% url 'financas:nova_categoria' %}" class="text-decoration-none text-dark">Nova Categoria</a></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -38,7 +36,6 @@
                 </table>
 
             <h3><a href="{% url 'financas:lista_receitas' %}" class= 'text-decoration-none text-dark'>Em Receita</a></h3>
-                {% include 'blocos/mensagens.html' %}
                 <table class="table table-hover">
                     <thead class="table-dark">
                         <tr>
@@ -65,7 +62,7 @@
                     </tbody>
                 </table>
 
-            <h3><a href="{% url 'financas:lista_despesas' %}" class= 'text-decoration-none text-dark'>Em Despesa</a></h3><h3></h3>
+            <h3><a href="{% url 'financas:lista_despesas' %}" class= 'text-decoration-none text-dark'>Em Despesa</a></h3>
                 <table class="table table-hover">
                     <thead class="table-dark">
                         <tr>
